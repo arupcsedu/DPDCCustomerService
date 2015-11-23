@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="app_name">Slider Menu</string>
+    <string name="app_name">DPDC Menu</string>
     <string name="action_settings">Settings</string>
     <string name="hello_world">Hello world!</string>
     <string name="drawer_open">Slider Menu Opened</string>
@@ -10,11 +10,11 @@
     <!-- Nav Drawer Menu Items -->
     <string-array name="nav_drawer_items">
         <item >Home</item>
-        <item >Find People</item>
-        <item >Photos</item>
-        <item >Communities</item>
-        <item >Pages</item>
-        <item >What\'s Hot</item>
+        <item >Load Change Procedure</item>
+        <item >Tariff Rate</item>
+        <item >NOCs Offices</item>
+        <item >New Connection</item>
+        <item >Complaint Center</item>
     </string-array>
     
     <!-- Nav Drawer List Item Icons -->
@@ -30,5 +30,14 @@
     
     <!-- Content Description -->
     <string name="desc_list_item_icon">Item Icon</string>
+
+    <string-array name="complaints_array">
+        <item>Too Much Load shading</item>
+        <item>Meter Reading is not right</item>
+        <item>Power Line Cut Off</item>
+        <item>Meter Problem</item>
+        <item>Bill Amount was not adjusted</item>
+    </string-array>
+
 
 </resources>

@@ -9,8 +9,9 @@ package info.androidhive.slidingmenu;
 
 public final class R {
     public static final class array {
-        public static final int nav_drawer_icons=0x7f040000;
-        public static final int nav_drawer_items=0x7f040001;
+        public static final int complaints_array=0x7f040000;
+        public static final int nav_drawer_icons=0x7f040001;
+        public static final int nav_drawer_items=0x7f040002;
     }
     public static final class attr {
     }
@@ -39,10 +40,15 @@ public final class R {
         public static final int list_item_bg_normal=0x7f020009;
         public static final int list_item_bg_pressed=0x7f02000a;
         public static final int list_selector=0x7f02000b;
+        public static final int repeat_bg=0x7f02000c;
     }
     public static final class id {
-        public static final int action_settings=0x7f0a0007;
+        public static final int action_settings=0x7f0a000b;
+        public static final int btnRegister=0x7f0a000a;
+        public static final int comment=0x7f0a0009;
+        public static final int comment_type=0x7f0a0008;
         public static final int counter=0x7f0a0005;
+        public static final int customer_id=0x7f0a0007;
         public static final int drawer_layout=0x7f0a0000;
         public static final int frame_container=0x7f0a0001;
         public static final int icon=0x7f0a0003;
@@ -53,12 +59,14 @@ public final class R {
     public static final class layout {
         public static final int activity_main=0x7f030000;
         public static final int drawer_list_item=0x7f030001;
-        public static final int fragment_community=0x7f030002;
-        public static final int fragment_find_people=0x7f030003;
-        public static final int fragment_home=0x7f030004;
-        public static final int fragment_pages=0x7f030005;
-        public static final int fragment_photos=0x7f030006;
-        public static final int fragment_whats_hot=0x7f030007;
+        public static final int footer_repeat=0x7f030002;
+        public static final int fragment_community=0x7f030003;
+        public static final int fragment_find_people=0x7f030004;
+        public static final int fragment_home=0x7f030005;
+        public static final int fragment_pages=0x7f030006;
+        public static final int fragment_photos=0x7f030007;
+        public static final int fragment_whats_hot=0x7f030008;
+        public static final int header_gradient=0x7f030009;
     }
     public static final class menu {
         public static final int main=0x7f090000;
