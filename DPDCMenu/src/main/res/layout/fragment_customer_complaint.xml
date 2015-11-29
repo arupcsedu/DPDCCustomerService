@@ -13,16 +13,38 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="10dip">
-            <!-- Customer ID Label -->
+            <!-- Customer Number Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:textColor="#372c24"
-                android:text="Customer ID"/>
-            <EditText android:id="@+id/customer_id"
+                android:text="Customer Number"/>
+            <TextView android:id="@+id/customer_no"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dip"
                 android:singleLine="true"
+                android:layout_marginBottom="20dip"/>
+            <!--  Customer Name Label -->`
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="Customer Name"/>
+            <TextView android:id="@+id/customer_name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="true"
+                android:layout_marginBottom="20dip"/>
+            <!--  Customer Address Label -->
+            <TextView android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:textColor="#372c24"
+                android:text="Customer Address"/>
+            <TextView android:id="@+id/customer_Address"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dip"
+                android:singleLine="false"
                 android:layout_marginBottom="20dip"/>
             <!--  Complaint Type Label -->
             <TextView android:layout_width="fill_parent"
