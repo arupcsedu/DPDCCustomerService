@@ -157,8 +157,8 @@ public class CustomerValidationFragment extends Fragment {
             // Dismiss the progress dialog
             if (pDialog.isShowing())
                 pDialog.dismiss();
-            Log.d("CustomerValidationFragment", "Json List length " + customerItems.length());
-            if(customerItems.length()!=0) {
+           // Log.d("CustomerValidationFragment", "Json List length " + customerItems.length());
+            if(customerItems!=null) {
                 Fragment customerCheckFragment = new CustomerComplaintFragment();
 
                 if (customerCheckFragment != null) {
