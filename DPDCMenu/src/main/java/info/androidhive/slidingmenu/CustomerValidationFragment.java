@@ -73,6 +73,7 @@ public class CustomerValidationFragment extends Fragment {
         rootView = inflater.inflate(R.layout.customer_check, container, false);
         customerSubBtn = (Button) rootView.findViewById(R.id.customerSubBtn);
         customerNumText = (EditText) rootView.findViewById(R.id.customer_id);
+
         //Attaching the OnclickListener with the button.
         customerSubBtn.setOnClickListener(new View.OnClickListener() {
             @Override

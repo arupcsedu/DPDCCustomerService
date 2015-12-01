@@ -49,6 +49,7 @@ public class CustomerComplaintFragment extends Fragment {
         complaintNameArray = this.getArguments().getStringArray(COMPLAINT_TYPE_NAME);
         complaintIdArray =  this.getArguments().getIntArray(COMPLAINT_TYPE_ID);
         cArraySize = this.getArguments().getInt(COMPLAINT_TYPE_SIZE);
+
         rootView = inflater.inflate(R.layout.fragment_customer_complaint, container, false);
 
         // Displaying all values on the screen

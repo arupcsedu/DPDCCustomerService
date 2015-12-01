@@ -55,6 +55,23 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
+       /* Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            String fragmentName = bundle.getString("start_customer_complaint");
+            if(fragmentName != null) {
+                Fragment customerCheckFragment = new CustomerComplaintFragment();
+                if (customerCheckFragment != null) {
+                    FragmentManager fragmentManager = getFragmentManager();
+                    fragmentManager.beginTransaction()
+                            .replace(R.id.frame_container, customerCheckFragment).commit();
+
+                } else {
+                    // error in creating fragment
+                    Log.e("GetCustomerInfo", "Error in creating fragment");
+                }
+            }
+        }*/
 		setContentView(R.layout.activity_main);
 
 		mTitle = mDrawerTitle = getTitle();

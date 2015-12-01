@@ -10,10 +10,12 @@ import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,6 +23,7 @@ import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.AdapterView.OnItemSelectedListener;
 
@@ -122,6 +125,27 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
         Button customerSubBtn = (Button) findViewById(R.id.newBtnRegister);
         mobileText = (EditText) findViewById(R.id.contact_no);
         remarkText = (EditText) findViewById(R.id.new_comment);
+
+        mobileText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(mobileText.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                return false;
+            }
+        });
+
+
+        remarkText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (event != null&& (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) {
+                    InputMethodManager in = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    in.hideSoftInputFromWindow(remarkText.getApplicationWindowToken(),InputMethodManager.HIDE_NOT_ALWAYS);
+                }
+                return false;
+            }
+        });
        // contactNo = mobileText.getText().toString();
        // cutomerRemarks = remarkText.getText().toString();;
         customerSubBtn.setOnClickListener(new View.OnClickListener() {
@@ -129,7 +153,17 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
             public void onClick(View view) {
                 // Calling async task to get json
                     Log.e("GetComplaintInfo", "POST Called");
-                new HttpAsyncTask().execute("http://202.79.18.105:8081/ords/dpdc_cms/post_customer_complaint");
+                if(mobileText.length()<7) {
+                    Context context = getApplicationContext();
+                    CharSequence text = "Wrong Contact Number!! Please Enter Again.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                    Log.e("NewComplaintActivity", "Error in Contact No");
+                }
+                else
+                    new HttpAsyncTask().execute("http://202.79.18.105:8081/ords/dpdc_cms/post_customer_complaint");
             }
         });
         //new ComplaintTypeInfo().execute();
@@ -262,10 +296,27 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
         // onPostExecute displays the results of the AsyncTask.
         @Override
         protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(), "Data Sent!", Toast.LENGTH_LONG).show();
+            Toast.makeText(getBaseContext(), "Complaint Sent!", Toast.LENGTH_LONG).show();
+
+           // Intent intent = new Intent(getApplicationContext(),MainActivity.class);
+           // String fragmentName = "CustomerComplaintFragment";
+           // intent.putExtra("start_customer_complaint", fragmentName);
+           // startActivity(intent);
+            onBackPressed();
         }
     }
 
+    @Override
+    public void onBackPressed(){
+        FragmentManager fm = getFragmentManager();
+        if (fm.getBackStackEntryCount() > 0) {
+            Log.i("MainActivity", "popping backstack");
+            fm.popBackStack();
+        } else {
+            Log.i("MainActivity", "nothing on backstack, calling super");
+            super.onBackPressed();
+        }
+    }
     private static String convertInputStreamToString(InputStream inputStream) throws IOException {
         BufferedReader bufferedReader = new BufferedReader( new InputStreamReader(inputStream));
         String line = "";
