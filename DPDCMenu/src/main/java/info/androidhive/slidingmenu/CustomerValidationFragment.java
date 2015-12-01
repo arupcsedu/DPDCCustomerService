@@ -27,6 +27,8 @@ import info.androidhive.slidingmenu.webservice.WebServiceHandler;
 public class CustomerValidationFragment extends Fragment {
 
     private static String url = "http://202.79.18.105:8081/ords/dpdc_cms/customer/";
+    private static String complaintUrl = "http://202.79.18.105:8081/ords/dpdc_cms/complaint_type";
+
     private ProgressDialog pDialog;
     // JSON Node names
 
@@ -35,9 +37,9 @@ public class CustomerValidationFragment extends Fragment {
     private static final String CUSTOMER_NAME = "customer_name";
     private static final String CUSTOMER_NUM = "customer_no";
     private static final String CUST_ADDR = "address";
-    private static final String LOCATION_CODE = "location_code";
-    private static final String AREA_CODE = "area_code";
-    private static final String TAG_PHONE_MOBILE = "mobile";
+    private static final String COMPLAINT_TYPE_NAME = "type_name";
+    private static final String COMPLAINT_TYPE_ID = "type_id";
+    private static final String COMPLAINT_TYPE_SIZE = "size";
     private static final String TAG_PHONE_HOME = "home";
     private static final String TAG_PHONE_OFFICE = "office";
 
@@ -47,9 +49,14 @@ public class CustomerValidationFragment extends Fragment {
     String location_code;
     String area_code;
     String address;
+    String complaintTypeName;
+    int [] complaintTypeIdArray = new int[100];
+    String[] typeNameArray = new String[100];
+    int complaintArraySize;
 
     // contacts JSONArray
     JSONArray customerItems = null;
+    JSONArray complaintItems = null;
 
     // Hashmap for ListView
     ArrayList<HashMap<String, String>> contactList;
@@ -103,6 +110,7 @@ public class CustomerValidationFragment extends Fragment {
     private class GetCustomerInfo extends AsyncTask<Void, Void, Void> {
 
         String jsonStr;
+        String complaintStr;
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
@@ -123,6 +131,7 @@ public class CustomerValidationFragment extends Fragment {
 
             // Making a request to url and getting response
             jsonStr = sh.makeServiceCall(url+customerNumText.getText(), WebServiceHandler.GET);
+            complaintStr = sh.makeServiceCall(complaintUrl, WebServiceHandler.GET);
 
             Log.d("Response: ", "> " + jsonStr);
 
@@ -141,6 +150,32 @@ public class CustomerValidationFragment extends Fragment {
                     //location_code = c.getString(LOCATION_CODE);
                    // area_code = c.getString(AREA_CODE);
                     address = c.getString(CUST_ADDR);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                Log.e("ServiceHandler", "Couldn't get any data from the url");
+            }
+
+            //For Complaint Type
+
+            if (complaintStr != null) {
+                try {
+                    JSONObject jsonComplaintObj = new JSONObject(complaintStr);
+
+                    // Getting JSON Array node
+                    complaintItems = jsonComplaintObj.getJSONArray(TAG_ITEMS);
+                    int i;
+                    for(i = 0 ;i<complaintItems.length();i++) {
+
+                        JSONObject cc = complaintItems.getJSONObject(i);
+
+                        //id = Integer.parseInt(c.getString(CUST_ID));
+                        complaintTypeName = cc.getString(COMPLAINT_TYPE_NAME);
+                        complaintTypeIdArray[i] = cc.getInt(COMPLAINT_TYPE_ID);
+                        typeNameArray[i] = complaintTypeName;
+                    }
+                    complaintArraySize = complaintItems.length();
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
@@ -168,6 +203,9 @@ public class CustomerValidationFragment extends Fragment {
                     args.putString(CUSTOMER_NUM, custNumber);
                     args.putString(CUSTOMER_NAME, name);
                     args.putString(CUST_ADDR, address);
+                    args.putStringArray(COMPLAINT_TYPE_NAME, typeNameArray);
+                    args.putIntArray(COMPLAINT_TYPE_ID, complaintTypeIdArray);
+                    args.putInt(COMPLAINT_TYPE_SIZE, complaintArraySize);
 
                     customerCheckFragment.setArguments(args);
 

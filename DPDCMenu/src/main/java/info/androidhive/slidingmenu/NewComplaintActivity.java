@@ -54,8 +54,9 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
     // JSON Node names
 
     private static final String TAG_ITEMS = "items";
+    private static final String COMPLAINT_TYPE_NAME = "type_name";
     private static final String COMPLAINT_TYPE_ID = "type_id";
-    private static final String COMPLAINT_TYPE = "type_name";
+    private static final String COMPLAINT_TYPE_SIZE = "size";
     int typePos;
     String contactNo;
     String cutomerRemarks;
@@ -72,6 +73,8 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
     ArrayList<HashMap<String, String>> complaintList;
     List<String> categories = new ArrayList<String>();
     private String[] typeList;
+    int [] idList;
+    int typeSize;
     EditText mobileText;
     EditText remarkText;
     String customerNo;
@@ -80,8 +83,12 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Bundle bundle = getIntent().getExtras();
-        if(bundle != null)
+        if(bundle != null) {
             customerNo = bundle.getString("customer_no");
+            typeList = bundle.getStringArray(COMPLAINT_TYPE_NAME);
+            idList = bundle.getIntArray(COMPLAINT_TYPE_ID);
+            typeSize = bundle.getInt(COMPLAINT_TYPE_SIZE);
+        }
         setContentView(R.layout.activity_new_complaint);
 
         complaintList = new ArrayList<HashMap<String, String>>();
@@ -99,8 +106,8 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
        // categories.add("Meter reading is not right");
         //categories.add("Bill is not matching with reading");
         //categories.add("Travel");
-        typeList = getResources().getStringArray(R.array.complaint_type_array);
-        for(int i = 0;i<typeList.length;i++)
+       // typeList = getResources().getStringArray(R.array.complaint_type_array);
+        for(int i = 0;i<typeSize;i++)
             categories.add(typeList[i]);
 
         // Creating adapter for spinner
@@ -244,7 +251,7 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
             complaintInfoService =  new ComplaintInfoService();
             Random randomGenerator = new Random();
             complaintInfoService.setComplaint_id(randomGenerator.nextInt(999));
-            complaintInfoService.setComplaint_type(typePos);
+            complaintInfoService.setComplaint_type(idList[typePos]);
             complaintInfoService.setCustomer_no(customerNo);
             complaintInfoService.setTracking_no("T124357");
             complaintInfoService.setRemarks(remarkText.getText().toString());

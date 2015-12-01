@@ -24,6 +24,9 @@ public class CustomerComplaintFragment extends Fragment {
     private static final String CUSTOMER_NAME = "customer_name";
     private static final String CUSTOMER_NUM = "customer_no";
     private static final String CUST_ADDR = "address";
+    private static final String COMPLAINT_TYPE_NAME = "type_name";
+    private static final String COMPLAINT_TYPE_ID = "type_id";
+    private static final String COMPLAINT_TYPE_SIZE = "size";
     private static final String LOCATION_CODE = "location_code";
     private static final String AREA_CODE = "area_code";
 
@@ -32,6 +35,9 @@ public class CustomerComplaintFragment extends Fragment {
     View rootView;
     String custName;
     String custNum;
+    String[] complaintNameArray = new String[100];
+    int[] complaintIdArray =new int[100];
+    int cArraySize;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -40,6 +46,9 @@ public class CustomerComplaintFragment extends Fragment {
         custNum = this.getArguments().getString(CUSTOMER_NUM);
         custName = this.getArguments().getString(CUSTOMER_NAME);
         String custAddr = this.getArguments().getString(CUST_ADDR);
+        complaintNameArray = this.getArguments().getStringArray(COMPLAINT_TYPE_NAME);
+        complaintIdArray =  this.getArguments().getIntArray(COMPLAINT_TYPE_ID);
+        cArraySize = this.getArguments().getInt(COMPLAINT_TYPE_SIZE);
         rootView = inflater.inflate(R.layout.fragment_customer_complaint, container, false);
 
         // Displaying all values on the screen
@@ -60,9 +69,12 @@ public class CustomerComplaintFragment extends Fragment {
             public void onClick(View view) {
                 //Creating an Intent which will invoke
                 //the other Activity (DynamicLayoutActivity).
-                  Intent intent = new Intent(rootView.getContext(),
+                Intent intent = new Intent(rootView.getContext(),
                          NewComplaintActivity.class);
-                    intent.putExtra("customer_no", custNum);
+                intent.putExtra("customer_no", custNum);
+                intent.putExtra(COMPLAINT_TYPE_NAME, complaintNameArray);
+                intent.putExtra(COMPLAINT_TYPE_ID, complaintIdArray);
+                intent.putExtra(COMPLAINT_TYPE_SIZE, cArraySize);
                 //This method will start the other activity.
                   startActivity(intent);
             }
