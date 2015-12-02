@@ -1,5 +1,6 @@
 package info.androidhive.slidingmenu;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
@@ -10,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -88,8 +90,10 @@ public class CustomerValidationFragment extends Fragment {
 
                 // Calling async task to get json
                 Log.d("CustomerValidationFragment", "> " + customerNumText.getText().length());
-                if(customerNumText.getText().length()==8)
+                if(customerNumText.getText().length()==8) {
+                    hideKeyboard();
                     new GetCustomerInfo().execute();
+                }
                 else
                 {
                     Context context = rootView.getContext();
@@ -233,4 +237,12 @@ public class CustomerValidationFragment extends Fragment {
 
     }
 
+    private void hideKeyboard() {
+        Activity currentActivity = this.getActivity();
+        if(currentActivity != null) {
+            InputMethodManager imm = (InputMethodManager) currentActivity.getSystemService(Context.
+                    INPUT_METHOD_SERVICE);
+            imm.hideSoftInputFromWindow(currentActivity.getCurrentFocus().getWindowToken(), 0);
+        }
+    }
 }

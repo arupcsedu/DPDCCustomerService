@@ -1,9 +1,5 @@
 package info.androidhive.slidingmenu.webservice;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
-import java.util.List;
-
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
@@ -15,8 +11,12 @@ import org.apache.http.client.utils.URLEncodedUtils;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.util.EntityUtils;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.List;
+
 /**
- * Created by arup on 11/29/15.
+ * Created by Ayub on 11/29/2015.
  */
 public class WebServiceHandler {
     static String response = null;
@@ -29,22 +29,19 @@ public class WebServiceHandler {
 
     /**
      * Making service call
-     *
      * @url - url to make request
      * @method - http request method
-     */
+     * */
     public String makeServiceCall(String url, int method) {
         return this.makeServiceCall(url, method, null);
     }
 
-
     /**
      * Making service call
-     *
      * @url - url to make request
      * @method - http request method
      * @params - http request params
-     */
+     * */
     public String makeServiceCall(String url, int method,
                                   List<NameValuePair> params) {
         try {
