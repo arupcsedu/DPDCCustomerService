@@ -5,6 +5,8 @@ import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -82,31 +84,58 @@ public class CustomerValidationFragment extends Fragment {
             public void onClick(View view) {
                 //Creating an Intent which will invoke
                 //the other Activity (DynamicLayoutActivity).
-              //  Intent intent = new Intent(getApplicationContext(),
-               //         DynamicLayoutActivity.class);
+                //  Intent intent = new Intent(getApplicationContext(),
+                //         DynamicLayoutActivity.class);
                 //This method will start the other activity.
-              //  startActivity(intent);
+                //  startActivity(intent);
 
+                if (isConnectingToInternet()) {
+                    // Calling async task to get json
+                    Log.d("CustomerValidationFragment", "> " + customerNumText.getText().length());
+                    if (customerNumText.getText().length() == 8) {
+                        hideKeyboard();
+                        new GetCustomerInfo().execute();
+                    } else {
+                        Context context = rootView.getContext();
+                        CharSequence text = "Wrong Customer Number!! Please Enter Again.";
+                        int duration = Toast.LENGTH_SHORT;
 
-                // Calling async task to get json
-                Log.d("CustomerValidationFragment", "> " + customerNumText.getText().length());
-                if(customerNumText.getText().length()==8) {
-                    hideKeyboard();
-                    new GetCustomerInfo().execute();
+                        Toast toast = Toast.makeText(context, text, duration);
+                        toast.show();
+                        Log.e("CustomerValidationFragment", "Error in Mobile No");
+                    }
                 }
-                else
-                {
+                else {
+
                     Context context = rootView.getContext();
-                    CharSequence text = "Wrong Customer Number!! Please Enter Again.";
+                    CharSequence text = "Problem in Internet Connection!! Please Connect to the Internet and Try Again.";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    Log.e("GetCustomerInfo", "Error in Parsing Data");
+                    Log.e("CustomerValidationFragment", "Error in Internet Connection");
+
                 }
             }
         });
         return rootView;
+    }
+
+
+    public boolean isConnectingToInternet(){
+        ConnectivityManager connectivity = (ConnectivityManager) rootView.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
+        if (connectivity != null)
+        {
+            NetworkInfo[] info = connectivity.getAllNetworkInfo();
+            if (info != null)
+                for (int i = 0; i < info.length; i++)
+                    if (info[i].getState() == NetworkInfo.State.CONNECTED)
+                    {
+                        return true;
+                    }
+
+        }
+        return false;
     }
 
     /**
