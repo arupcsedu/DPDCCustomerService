@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    android:padding="@dimen/button_padding"
+    android:minWidth="@dimen/button_min_width">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Comment"
+        android:paddingLeft="@dimen/text_padding_left"
+        android:paddingTop="@dimen/single_line_text_padding_top"
+        android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
+        android:textSize="@dimen/TextSizeSmall"
+        android:textColor="@color/caption_text_color" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/edit_comment"
+        android:paddingLeft="@dimen/edit_text_padding_left"
+        android:paddingTop="@dimen/single_line_text_padding_top"
+        android:paddingRight="@dimen/edit_text_padding_right"
+        android:password="false"
+        android:textSize="@dimen/TextSizeMedium"
+        android:hint="Write comment" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Rating"
+        android:id="@+id/textView3"
+        android:paddingLeft="@dimen/text_padding_left"
+        android:paddingTop="@dimen/single_line_text_padding_top"
+        android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
+        android:textSize="@dimen/TextSizeSmall"
+        android:textColor="@color/caption_text_color" />
+
+    <RatingBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/ratingbar_complaint"
+        android:isIndicator="false"
+        android:stepSize="1.0"
+        android:numStars="5"
+        android:paddingTop="8dp"
+        android:paddingBottom="16dp"
+        android:rating="0"
+        android:indeterminateOnly="false" />
+
+    <Button
+        android:layout_width="107dp"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:id="@+id/btn_submit_rating"
+        android:layout_gravity="right"
+        android:layout_marginTop="@dimen/button_margin_top"
+        android:textSize="@dimen/TextSizeMedium" />
+
+</LinearLayout>

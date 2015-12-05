@@ -1,29 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent" android:layout_height="match_parent"
-    android:layout_marginBottom="12dp"
-    android:layout_marginTop="12dp">
+    android:layout_marginBottom="16dp"
+    android:layout_marginTop="16dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="16dp">
     <TextView
         android:id="@+id/txt_track_no"
-        android:layout_width="90dp"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
         android:text="track no"
         android:singleLine="true"
+        android:layout_below="@+id/txt_status"
         android:layout_alignParentLeft="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/TextSizeSmall"
+        android:textColor="@color/caption_text_color" />
     <TextView
         android:id="@+id/txt_complaint_type"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="type"
         android:singleLine="true"
-        android:layout_alignParentTop="true"
-        android:layout_toRightOf="@+id/txt_track_no"
-        android:layout_toLeftOf="@+id/txt_status"
-        android:layout_toStartOf="@+id/txt_status"
-        android:layout_marginTop="8dp"
-        android:layout_alignBottom="@+id/txt_track_no" />
+        android:textSize="@dimen/TextSizeMedium"
+        android:layout_alignBottom="@+id/txt_status"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
     <TextView
         android:id="@+id/txt_status"
         android:layout_width="80dp"
@@ -32,5 +34,19 @@
         android:gravity="right"
         android:layout_alignParentRight="true"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp" />
+        android:layout_marginBottom="8dp"
+        android:textSize="@dimen/TextSizeMedium" />
+
+    <RatingBar
+        style="?android:attr/ratingBarStyleSmall"
+        android:id="@+id/ratingBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.1"
+        android:isIndicator="true"
+        android:layout_alignTop="@+id/txt_track_no"
+        android:layout_alignRight="@+id/txt_status"
+        android:layout_alignEnd="@+id/txt_status" />
+
 </RelativeLayout>

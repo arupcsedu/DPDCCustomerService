@@ -1,6 +1,7 @@
 package info.androidhive.slidingmenu;
 
 import android.app.Activity;
+import android.app.DialogFragment;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +15,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -49,7 +51,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     String custName;
     String custNum;
     String[] complaintNameArray = new String[100];
-    int[] complaintIdArray =new int[100];
+    int[] complaintIdArray = new int[100];
     int cArraySize;
 
     private ArrayList<CustomerComplaintData> complaints;
@@ -125,28 +127,29 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
         lblAddr.setText(custAddr);
         lblAddr.setText(custAddr);
 
-
-        //customerSubBtn = (Button) rootView.findViewById(R.id.btnRegister);
-        //Attaching the OnclickListener with the button.
-        /*customerSubBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Creating an Intent which will invoke
-                //the other Activity (DynamicLayoutActivity).
-                Intent intent = new Intent(rootView.getContext(),
-                         NewComplaintActivity.class);
-                intent.putExtra("customer_no", custNum);
-                intent.putExtra(COMPLAINT_TYPE_NAME, complaintNameArray);
-                intent.putExtra(COMPLAINT_TYPE_ID, complaintIdArray);
-                intent.putExtra(COMPLAINT_TYPE_SIZE, cArraySize);
-                //This method will start the other activity.
-                  startActivity(intent);
-            }
-        });*/
-
         complaintListVewAdapter = new ComplaintListVewAdapter(this.getActivity(), complaints);
         ListView lvCustomerComplaint = (ListView)rootView.findViewById(R.id.list_customer_complaint);
         lvCustomerComplaint.setAdapter(complaintListVewAdapter);
+
+        lvCustomerComplaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position,
+                                    long id) {
+
+                //String item = ((TextView)view).getText().toString();
+               CustomerComplaintData item = (CustomerComplaintData)complaintListVewAdapter.getItem(position);
+               Toast.makeText(rootView.getContext(), item.complaintType + " " +
+               item.trackNo + " " + item.status, Toast.LENGTH_SHORT).show();
+
+                CustomerFeedbackDialog feedbackDialog = new CustomerFeedbackDialog();
+                feedbackDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
+                Bundle args = new Bundle();
+                args.putInt("track_no", Integer.parseInt(item.trackNo));
+                feedbackDialog.setArguments(args);
+                feedbackDialog.show(getFragmentManager(), "CustomerFeedbackDialog");
+
+            }
+        });
 
         CustomerComplaintWebService service = new CustomerComplaintWebService();
         service.queryCustomerComplaints(custNum, this);
@@ -157,7 +160,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     @Override
     public void onResume() {
         super.onResume();
-        Log.i("CustomerComplaintFragment", "onResume");
+        //Log.i("CustomerComplaintFragment", "onResume");
     }
 
     @Override

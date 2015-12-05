@@ -20,22 +20,36 @@
             <!--  Customer Contact No Label -->`
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="Contact Number"/>
+                android:text="Contact Number"
+                android:textSize="@dimen/TextSizeSmall"
+                android:id="@+id/cap_contact_no"
+                android:paddingTop="@dimen/single_line_text_padding_top"
+                android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
+                android:paddingLeft="@dimen/text_padding_left"
+                android:singleLine="false"
+                android:phoneNumber="false"
+                android:textColor="@color/caption_text_color" />
 
             <EditText android:id="@+id/contact_no"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="false"
-                android:layout_marginTop="2dp"
                 android:imeOptions="actionDone"
-                android:inputType="numberDecimal" />
+                android:inputType="numberDecimal"
+                android:hint="Enter contact number"
+                android:paddingBottom="@dimen/single_line_text_padding_bottom"
+                android:paddingLeft="@dimen/edit_text_padding_left"
+                android:paddingRight="@dimen/edit_text_padding_right" />
 
             <!--  Complaint Type Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Complaint Type"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="2dp"/>
+                android:paddingLeft="@dimen/text_padding_left"
+                android:paddingTop="@dimen/single_line_text_padding_top"
+                android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
+                android:textSize="@dimen/TextSizeSmall"
+                android:textColor="@color/caption_text_color" />
 
             <!-- Spinner Element -->
             <Spinner
@@ -43,27 +57,40 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:prompt="@string/complaint_category_title"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
             />
 
             <!-- Comment Label -->
             <TextView android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="Comment"
-                android:layout_marginBottom="2dp"/>
+                android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
+                android:paddingTop="@dimen/single_line_text_padding_top"
+                android:paddingLeft="@dimen/text_padding_left"
+                android:textSize="@dimen/TextSizeSmall"
+                android:textColor="@color/caption_text_color" />
 
             <EditText android:id="@+id/new_comment"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:singleLine="false">
+                android:singleLine="false"
+                android:gravity="left"
+                android:hint="Write comment"
+                android:paddingLeft="@dimen/edit_text_padding_left"
+                android:paddingRight="@dimen/edit_text_padding_right"
+                android:paddingBottom="@dimen/single_line_text_padding_bottom">
 
                 </EditText>
             <!-- Send Button -->
             <Button android:id="@+id/newBtnRegister"
-                android:layout_width="fill_parent"
+                android:layout_width="141dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="10dip"
-                android:text="Submit"/>
+                android:text="Submit"
+                android:padding="@dimen/button_padding"
+                android:layout_marginTop="@dimen/button_margin_top"
+                android:textSize="@dimen/TextSizeMedium"
+                android:maxWidth="@dimen/button_min_width"
+                android:layout_gravity="right" />
 
         </LinearLayout>
 
