@@ -1,6 +1,7 @@
 package info.androidhive.slidingmenu.adapter;
 
 import android.app.Activity;
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,18 +24,16 @@ import info.androidhive.slidingmenu.model.CustomerComplaintData;
  */
 public class ComplaintListVewAdapter extends ArrayAdapter {
     ArrayList<CustomerComplaintData> complaintList;
-    Activity mainActivity;
+    Context context;
+    Activity activity;
 
-    //TextView txtTrackNo;
-    //TextView txtComplaintType;
-    //TextView txtStatus;
-    //RatingBar ratingBar;
+    public ComplaintListVewAdapter(Context context, int textViewResourceId,
+                                   ArrayList<CustomerComplaintData> list, Activity activity) {
 
-    public ComplaintListVewAdapter(Activity activity,
-                                   ArrayList<CustomerComplaintData> list) {
-        super(activity.getBaseContext(),0, list);
-        this.mainActivity = activity;
+        super(context, textViewResourceId, list);
+        this.context = context;
         this.complaintList = list;
+        this.activity = activity;
     }
 
     public void setData(ArrayList<CustomerComplaintData> list) {
@@ -62,29 +61,32 @@ public class ComplaintListVewAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        LayoutInflater inflater = mainActivity.getLayoutInflater();
+
         if (convertView == null) {
 
-            convertView = inflater.inflate(R.layout.complaint_list, null);
-            final TextView txtTrackNo = (TextView) convertView.findViewById(R.id.txt_track_no);
-            final TextView txtComplaintType = (TextView) convertView.findViewById(R.id.txt_complaint_type);
-            final TextView txtStatus = (TextView) convertView.findViewById(R.id.txt_status);
-            final RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
-
-            CustomerComplaintData complaintData = complaintList.get(position);
-            txtTrackNo.setText(complaintData.trackNo);
-            txtComplaintType.setText(complaintData.complaintType);
-            txtStatus.setText(complaintData.status);
-            if(complaintData.rating == 0) {
-                ratingBar.setVisibility(View.INVISIBLE);
-            }
-            else {
-                ratingBar.setRating((float) complaintData.rating);
-                ratingBar.setVisibility(View.VISIBLE);
-            }
-
-            Log.i("Adapter", "Pos: "+position + " tackno: " + complaintData.trackNo);
+            LayoutInflater inflater = (LayoutInflater)activity.getLayoutInflater();
+            convertView = inflater.inflate(R.layout.complaint_list, parent, false);
         }
+
+        final TextView txtComplaintType = (TextView) convertView.findViewById(R.id.txt_complaint_type);
+        final TextView txtStatus = (TextView) convertView.findViewById(R.id.txt_status);
+        final RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
+        final TextView txtTrackNo = (TextView) convertView.findViewById(R.id.txt_track_no);
+
+        CustomerComplaintData complaintData = complaintList.get(position);
+        txtTrackNo.setText(complaintData.trackNo);
+        txtComplaintType.setText(complaintData.complaintType);
+        txtStatus.setText(complaintData.status);
+
+        if(complaintData.rating == 0) {
+            ratingBar.setVisibility(View.INVISIBLE);
+        }
+        else {
+            ratingBar.setRating((float) complaintData.rating);
+            ratingBar.setVisibility(View.VISIBLE);
+        }
+
+        Log.i("Adapter", "Pos: "+position + " tackno: " + txtTrackNo.getText());
 
         return convertView;
     }

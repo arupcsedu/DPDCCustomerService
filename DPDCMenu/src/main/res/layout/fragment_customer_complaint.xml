@@ -24,7 +24,7 @@
             android:text="Customer Number:"
             android:id="@+id/cap_customer_no"
             android:layout_alignParentStart="true"
-                android:paddingTop="@dimen/single_line_text_padding_top"
+                android:paddingTop="@dimen/button_padding"
                 android:paddingLeft="@dimen/text_padding_left"
                 android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
                 android:textSize="@dimen/TextSizeSmall" />
@@ -50,7 +50,7 @@
                 android:layout_toEndOf="@+id/cap_customer_no"
                 android:layout_alignParentRight="true"
                 android:layout_alignStart="@+id/customer_name"
-                android:paddingTop="@dimen/single_line_text_padding_top"
+                android:paddingTop="@dimen/button_padding"
                 android:paddingLeft="@dimen/text_padding_left"
                 android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
                 android:textSize="@dimen/TextSizeSmall" />
@@ -77,7 +77,7 @@
                 android:layout_below="@+id/customer_no"
                 android:layout_alignParentStart="true"
                 android:layout_alignEnd="@+id/customer_name"
-                android:paddingTop="@dimen/single_line_text_padding_top"
+                android:paddingTop="@dimen/button_padding"
                 android:textIsSelectable="true"
                 android:paddingLeft="@dimen/text_padding_left"
                 android:paddingBottom="@dimen/single_line_dense_text_padding_bottom"
@@ -110,11 +110,14 @@
                     android:text="Complaint List"
                     android:id="@+id/textView"
                     android:padding="@dimen/single_line_text_padding_bottom"
-                    android:textSize="@dimen/TextSizeMedium" />
+                    android:textSize="@dimen/TextSizeMedium"
+                    android:gravity="left" />
+
             <Space
                 android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:height="4dp"/>
+                android:layout_height="2dp"
+                android:background="?android:attr/listDivider"
+                android:clickable="true" />
 
             <ListView
                 android:layout_width="wrap_content"

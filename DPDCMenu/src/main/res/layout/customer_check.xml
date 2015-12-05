@@ -33,11 +33,12 @@
                 android:singleLine="true"
                 android:imeOptions="actionDone"
                 android:inputType="number"
-                android:textSize="@dimen/TextSizeMedium"
                 android:paddingLeft="@dimen/edit_text_padding_left"
                 android:paddingRight="@dimen/edit_text_padding_right"
                 android:paddingBottom="@dimen/single_line_text_padding_bottom"
-                android:password="false" />
+                android:password="false"
+                android:hint="Enter customer number"
+                android:textSize="@dimen/TextSizeLarge" />
 
             <!-- Send Button -->
             <Button android:id="@+id/customerSubBtn"

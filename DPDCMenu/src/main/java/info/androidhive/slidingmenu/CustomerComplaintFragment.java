@@ -48,8 +48,6 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
 
     private static final String STATUS_RESOLVED = "Solved";
 
-
-    Button customerSubBtn;
     String custName;
     String custNum;
     String[] complaintNameArray = new String[100];
@@ -61,6 +59,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     private View rootView;
     private ComplaintListVewAdapter complaintListVewAdapter;
     private Menu optMenu;
+    boolean isResumeAfterPause = false;
 
 
     public CustomerComplaintFragment() {
@@ -109,6 +108,8 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        getActivity().setTitle("Customer Complaint");
         //int custId = this.getArguments().getInt(CUST_ID);
         custNum = this.getArguments().getString(CUSTOMER_NUM);
         custName = this.getArguments().getString(CUSTOMER_NAME);
@@ -129,7 +130,8 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
         lblAddr.setText(custAddr);
         lblAddr.setText(custAddr);
 
-        complaintListVewAdapter = new ComplaintListVewAdapter(this.getActivity(), complaints);
+        complaintListVewAdapter = new ComplaintListVewAdapter(getActivity().getApplicationContext(),
+                R.id.list_customer_complaint, complaints, getActivity());
         ListView lvCustomerComplaint = (ListView)rootView.findViewById(R.id.list_customer_complaint);
         lvCustomerComplaint.setAdapter(complaintListVewAdapter);
 
@@ -153,7 +155,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
                 else if (item.rating > 0)
                    Toast.makeText(rootView.getContext(), "You already rated it", Toast.LENGTH_SHORT).show();
                 else
-                   Toast.makeText(rootView.getContext(), "The complaint is not solved. You cannot rate it now", Toast.LENGTH_SHORT).show();
+                   Toast.makeText(rootView.getContext(), "This complaint is not solved yet. You cannot rate it now", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -164,9 +166,22 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     }
 
     @Override
-    public void onResume() {
+     public void onResume() {
         super.onResume();
-        //Log.i("CustomerComplaintFragment", "onResume");
+        if(isResumeAfterPause) {
+            CustomerComplaintWebService service = new CustomerComplaintWebService();
+            service.queryCustomerComplaints(custNum, this);
+        }
+
+        Log.i("ComplaintFragment", "onResume");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        isResumeAfterPause = true;
+        Log.i("ComplaintFragment", "onStop");
     }
 
     @Override
@@ -187,9 +202,6 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
             pDialog.dismiss();
             pDialog = null;
         }
-        /**
-         * Updating parsed JSON data into ListView
-         * */
 
         complaintListVewAdapter.setData((ArrayList<CustomerComplaintData>)result);
         complaintListVewAdapter.notifyDataSetChanged();

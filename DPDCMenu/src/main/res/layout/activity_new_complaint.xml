@@ -39,7 +39,8 @@
                 android:hint="Enter contact number"
                 android:paddingBottom="@dimen/single_line_text_padding_bottom"
                 android:paddingLeft="@dimen/edit_text_padding_left"
-                android:paddingRight="@dimen/edit_text_padding_right" />
+                android:paddingRight="@dimen/edit_text_padding_right"
+                android:textSize="@dimen/TextSizeLarge" />
 
             <!--  Complaint Type Label -->
             <TextView android:layout_width="fill_parent"
@@ -78,7 +79,8 @@
                 android:hint="Write comment"
                 android:paddingLeft="@dimen/edit_text_padding_left"
                 android:paddingRight="@dimen/edit_text_padding_right"
-                android:paddingBottom="@dimen/single_line_text_padding_bottom">
+                android:paddingBottom="@dimen/single_line_text_padding_bottom"
+                android:textSize="@dimen/TextSizeLarge">
 
                 </EditText>
             <!-- Send Button -->

@@ -42,7 +42,8 @@ public class CustomerComplaintWebService extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        this.eventDelegate.onPreExecute();
+        if(this.eventDelegate != null)
+            this.eventDelegate.onPreExecute();
     }
 
     @Override
@@ -90,7 +91,8 @@ public class CustomerComplaintWebService extends AsyncTask<Void, Void, Void> {
     @Override
     protected void onPostExecute(Void result) {
         super.onPostExecute(result);
-        this.eventDelegate.onPostExecute(complaintArray);
+        if(this.eventDelegate != null)
+            this.eventDelegate.onPostExecute(complaintArray);
     }
 
 }
