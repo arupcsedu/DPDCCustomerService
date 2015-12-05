@@ -153,7 +153,10 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
             public void onClick(View view) {
                 // Calling async task to get json
                     Log.e("GetComplaintInfo", "POST Called");
-                if(mobileText.length()<7) {
+                if(mobileText.length() == 11 && mobileText.getText().charAt(0)=='0') {
+                    new HttpAsyncTask().execute("http://202.79.18.105:8081/ords/dpdc_cms/post_customer_complaint");
+                }
+                else {
                     Context context = getApplicationContext();
                     CharSequence text = "Wrong Contact Number!! Please Enter Again.";
                     int duration = Toast.LENGTH_SHORT;
@@ -162,8 +165,6 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
                     toast.show();
                     Log.e("NewComplaintActivity", "Error in Contact No");
                 }
-                else
-                    new HttpAsyncTask().execute("http://202.79.18.105:8081/ords/dpdc_cms/post_customer_complaint");
             }
         });
         //new ComplaintTypeInfo().execute();
