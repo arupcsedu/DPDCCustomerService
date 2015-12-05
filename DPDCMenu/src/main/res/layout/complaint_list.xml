@@ -5,17 +5,18 @@
     android:layout_marginTop="16dp"
     android:paddingTop="8dp"
     android:paddingBottom="16dp">
+
     <TextView
-        android:id="@+id/txt_track_no"
-        android:layout_width="110dp"
+        android:id="@+id/txt_status"
+        android:layout_width="80dp"
+        android:text="status"
         android:layout_height="wrap_content"
-        android:text="track no"
-        android:singleLine="true"
-        android:layout_below="@+id/txt_status"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="@dimen/TextSizeSmall"
-        android:textColor="@color/caption_text_color" />
+        android:gravity="right"
+        android:textSize="@dimen/TextSizeMedium"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
+
     <TextView
         android:id="@+id/txt_complaint_type"
         android:layout_width="wrap_content"
@@ -23,19 +24,25 @@
         android:text="type"
         android:singleLine="true"
         android:textSize="@dimen/TextSizeMedium"
-        android:layout_alignBottom="@+id/txt_status"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_toLeftOf="@id/txt_status"
+        android:layout_toStartOf="@id/txt_status" />
+
+
     <TextView
-        android:id="@+id/txt_status"
-        android:layout_width="80dp"
-        android:text="status"
+        android:id="@+id/txt_track_no"
+        android:layout_width="110dp"
         android:layout_height="wrap_content"
-        android:gravity="right"
-        android:layout_alignParentRight="true"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="@dimen/TextSizeMedium" />
+        android:text="track no"
+        android:singleLine="true"
+        android:layout_below="@id/txt_status"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:textSize="@dimen/TextSizeSmall"
+        android:textColor="@color/caption_text_color" />
+
+
 
     <RatingBar
         style="?android:attr/ratingBarStyleSmall"
@@ -45,8 +52,8 @@
         android:numStars="5"
         android:stepSize="0.1"
         android:isIndicator="true"
-        android:layout_alignTop="@+id/txt_track_no"
-        android:layout_alignRight="@+id/txt_status"
-        android:layout_alignEnd="@+id/txt_status" />
+        android:layout_alignTop="@id/txt_track_no"
+        android:layout_alignRight="@id/txt_status"
+        android:layout_alignEnd="@id/txt_status" />
 
 </RelativeLayout>

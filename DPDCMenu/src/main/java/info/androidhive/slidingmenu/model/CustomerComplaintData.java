@@ -12,4 +12,5 @@ public class CustomerComplaintData {
     public String gangComment;
     public String date;
     public String complaintType;
+    public int    rating;
 }

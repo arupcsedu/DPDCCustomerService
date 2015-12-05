@@ -26,6 +26,7 @@ public class CustomerComplaintWebService extends AsyncTask<Void, Void, Void> {
     private static final String TAG_COMPLAINT_FEEDBACK = "feedback";
     private static final String TAG_COMPLAINT_GANG_COMMENT = "gang_comment";
     private static final String TAG_COMPLAINT_TYPE = "complaint_type";
+    private static final String TAG_COMPLAINT_RATING = "customer_ratings";
 
     private WeServiceExecutionEvent eventDelegate;
     private ArrayList<CustomerComplaintData> complaintArray;
@@ -73,6 +74,7 @@ public class CustomerComplaintWebService extends AsyncTask<Void, Void, Void> {
                     complaintData.trackNo = complaint.getString(TAG_COMPLAINT_TRACK_ID);
                     complaintData.complaintType = complaint.getString(TAG_COMPLAINT_TYPE);
                     complaintData.status = complaint.getString(TAG_COMPLAINT_STATUS);
+                    complaintData.rating = complaint.getInt(TAG_COMPLAINT_RATING);
                     complaintArray.add(complaintData);
                 }
             } catch (JSONException e) {

@@ -199,7 +199,7 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
         typePos = position;
 
         // Showing selected spinner item
-        Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
+        //Toast.makeText(parent.getContext(), "Selected: " + item, Toast.LENGTH_LONG).show();
 
     }
 

@@ -46,6 +46,8 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     private static final String LOCATION_CODE = "location_code";
     private static final String AREA_CODE = "area_code";
 
+    private static final String STATUS_RESOLVED = "Solved";
+
 
     Button customerSubBtn;
     String custName;
@@ -138,16 +140,20 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
 
                 //String item = ((TextView)view).getText().toString();
                CustomerComplaintData item = (CustomerComplaintData)complaintListVewAdapter.getItem(position);
-               Toast.makeText(rootView.getContext(), item.complaintType + " " +
-               item.trackNo + " " + item.status, Toast.LENGTH_SHORT).show();
+               if(item.rating == 0 && item.status.compareTo(STATUS_RESOLVED) == 0) {
 
-                CustomerFeedbackDialog feedbackDialog = new CustomerFeedbackDialog();
-                feedbackDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
-                Bundle args = new Bundle();
-                args.putInt("track_no", Integer.parseInt(item.trackNo));
-                feedbackDialog.setArguments(args);
-                feedbackDialog.show(getFragmentManager(), "CustomerFeedbackDialog");
-
+                   CustomerFeedbackDialog feedbackDialog = new CustomerFeedbackDialog();
+                   feedbackDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
+                   //Bundle args = new Bundle();
+                   //args.putString("track_no", item.trackNo);
+                   //feedbackDialog.setArguments(args);
+                   feedbackDialog.setTrackNo(item.trackNo);
+                   feedbackDialog.show(getFragmentManager(), "CustomerFeedbackDialog");
+               }
+                else if (item.rating > 0)
+                   Toast.makeText(rootView.getContext(), "You already rated it", Toast.LENGTH_SHORT).show();
+                else
+                   Toast.makeText(rootView.getContext(), "The complaint is not solved. You cannot rate it now", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -177,8 +183,10 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     @Override
     public void onPostExecute(Object result) {
         // Dismiss the progress dialog
-        if (pDialog.isShowing())
+        if (pDialog.isShowing()) {
             pDialog.dismiss();
+            pDialog = null;
+        }
         /**
          * Updating parsed JSON data into ListView
          * */

@@ -43,7 +43,7 @@
             <Button android:id="@+id/customerSubBtn"
                 android:layout_width="138dp"
                 android:layout_height="wrap_content"
-                android:text="Validate"
+                android:text="Submit"
                 android:padding="@dimen/button_padding"
                 android:textSize="@dimen/TextSizeMedium"
                 android:minWidth="@dimen/button_min_width"

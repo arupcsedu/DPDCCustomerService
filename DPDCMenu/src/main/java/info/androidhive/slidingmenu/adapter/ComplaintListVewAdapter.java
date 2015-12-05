@@ -1,11 +1,14 @@
 package info.androidhive.slidingmenu.adapter;
 
 import android.app.Activity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListAdapter;
+import android.widget.RatingBar;
 import android.widget.TextView;
 
 import org.w3c.dom.Text;
@@ -18,17 +21,18 @@ import info.androidhive.slidingmenu.model.CustomerComplaintData;
 /**
  * Created by ASUS on 11/28/2015.
  */
-public class ComplaintListVewAdapter extends BaseAdapter {
+public class ComplaintListVewAdapter extends ArrayAdapter {
     ArrayList<CustomerComplaintData> complaintList;
     Activity mainActivity;
 
-    TextView txtTrackNo;
-    TextView txtComplaintType;
-    TextView txtStatus;
+    //TextView txtTrackNo;
+    //TextView txtComplaintType;
+    //TextView txtStatus;
+    //RatingBar ratingBar;
 
     public ComplaintListVewAdapter(Activity activity,
                                    ArrayList<CustomerComplaintData> list) {
-        super();
+        super(activity.getBaseContext(),0, list);
         this.mainActivity = activity;
         this.complaintList = list;
     }
@@ -60,16 +64,28 @@ public class ComplaintListVewAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         LayoutInflater inflater = mainActivity.getLayoutInflater();
         if (convertView == null) {
+
             convertView = inflater.inflate(R.layout.complaint_list, null);
-            txtTrackNo = (TextView) convertView.findViewById(R.id.txt_track_no);
-            txtComplaintType = (TextView) convertView.findViewById(R.id.txt_complaint_type);
-            txtStatus = (TextView) convertView.findViewById(R.id.txt_status);
+            final TextView txtTrackNo = (TextView) convertView.findViewById(R.id.txt_track_no);
+            final TextView txtComplaintType = (TextView) convertView.findViewById(R.id.txt_complaint_type);
+            final TextView txtStatus = (TextView) convertView.findViewById(R.id.txt_status);
+            final RatingBar ratingBar = (RatingBar) convertView.findViewById(R.id.ratingBar);
+
+            CustomerComplaintData complaintData = complaintList.get(position);
+            txtTrackNo.setText(complaintData.trackNo);
+            txtComplaintType.setText(complaintData.complaintType);
+            txtStatus.setText(complaintData.status);
+            if(complaintData.rating == 0) {
+                ratingBar.setVisibility(View.INVISIBLE);
+            }
+            else {
+                ratingBar.setRating((float) complaintData.rating);
+                ratingBar.setVisibility(View.VISIBLE);
+            }
+
+            Log.i("Adapter", "Pos: "+position + " tackno: " + complaintData.trackNo);
         }
 
-        CustomerComplaintData complaintData = complaintList.get(position);
-        txtTrackNo.setText(complaintData.trackNo);
-        txtComplaintType.setText(complaintData.complaintType);
-        txtStatus.setText(complaintData.status);
         return convertView;
     }
 }
