@@ -34,6 +34,7 @@ public class CustomerFeedbackWebService extends AsyncTask<String, Void, String> 
     private String trackNo;
     private String rating;
     private WeServiceExecutionEvent eventDelegate;
+    private String response;
 
     public void submitCustomerFeedback(String trackNo, String rating,
                                         WeServiceExecutionEvent eventDelegate) {
@@ -52,14 +53,13 @@ public class CustomerFeedbackWebService extends AsyncTask<String, Void, String> 
 
     @Override
     protected String doInBackground(String... urls) {
-        String response;
 
         List<NameValuePair> pairs = new ArrayList<NameValuePair>();
         pairs.add(new BasicNameValuePair("ECUSTOMER_FEEDBACK", this.rating));
         pairs.add(new BasicNameValuePair("ETRACKING_NO", this.trackNo));
 
         WebServiceHandler serviceHandler = new WebServiceHandler();
-        response = serviceHandler.makeServiceCall(URL,WebServiceHandler.POST, pairs);
+        response = serviceHandler.makeServiceCall(URL, WebServiceHandler.POST, pairs);
 
         return response;
     }
@@ -68,6 +68,6 @@ public class CustomerFeedbackWebService extends AsyncTask<String, Void, String> 
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
         if(this.eventDelegate != null)
-            this.eventDelegate.onPostExecute(result);
+            this.eventDelegate.onPostExecute(response);
     }
 }

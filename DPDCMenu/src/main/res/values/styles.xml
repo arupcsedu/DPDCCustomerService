@@ -17,6 +17,7 @@
         <!-- All customizations that are NOT specific to a particular API-level can go here. -->
         <item name="android:textViewStyle">@style/RobotoTextViewStyle</item>
         <item name="android:buttonStyle">@style/RobotoButtonStyle</item>
+        <item name="android:actionButtonStyle">@style/ActionButtonStyle</item>
 
     </style>
 
@@ -36,5 +37,10 @@
     </style>
     <style name="RobotoSpinnerItemTextStyle" parent="android:Widget.TextView.SpinnerItem">
         <item name="android:fontFamily">sans-serif-light</item>
+    </style>
+    <style name="ActionButtonStyle" parent="@android:style/Widget.Holo.Light.ActionButton">
+        <item name="android:minWidth">0dip</item>
+        <item name="android:paddingLeft">10dip</item>
+        <item name="android:paddingRight">10dip</item>
     </style>
 </resources>

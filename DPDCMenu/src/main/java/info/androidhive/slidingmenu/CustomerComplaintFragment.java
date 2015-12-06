@@ -3,10 +3,13 @@ package info.androidhive.slidingmenu;
 import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -60,6 +63,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     private ComplaintListVewAdapter complaintListVewAdapter;
     private Menu optMenu;
     boolean isResumeAfterPause = false;
+    boolean isRefresh = false;
 
 
     public CustomerComplaintFragment() {
@@ -74,15 +78,20 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        if(menu != null)
+        if(menu != null) {
             menu.findItem(R.id.action_new_complaint).setVisible(true);
+            menu.findItem(R.id.action_refresh).setVisible(true);
+        }
         optMenu = menu;
     }
 
     @Override
     public void onDestroyView() {
-        if(optMenu != null)
+        if(optMenu != null) {
             optMenu.findItem(R.id.action_new_complaint).setVisible(false);
+            optMenu.findItem(R.id.action_refresh).setVisible(false);
+        }
+
         super.onDestroyView();
     }
 
@@ -96,9 +105,13 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
             case R.id.action_new_complaint:
 
                 openNewComplaintActivity();
-
                 return true;
 
+            case R.id.action_refresh: {
+                isRefresh = true;
+                refreshCustomerComplaint();
+                return true;
+            }
             default:
 
                 return super.onOptionsItemSelected(item);
@@ -109,7 +122,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        getActivity().setTitle("Customer Complaint");
+        getActivity().setTitle("Complaints");
         //int custId = this.getArguments().getInt(CUST_ID);
         custNum = this.getArguments().getString(CUSTOMER_NUM);
         custName = this.getArguments().getString(CUSTOMER_NAME);
@@ -159,8 +172,9 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
             }
         });
 
-        CustomerComplaintWebService service = new CustomerComplaintWebService();
-        service.queryCustomerComplaints(custNum, this);
+        refreshCustomerComplaint();
+        /*CustomerComplaintWebService service = new CustomerComplaintWebService();
+        service.queryCustomerComplaints(custNum, this);*/
 
         return rootView;
     }
@@ -168,10 +182,13 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     @Override
      public void onResume() {
         super.onResume();
+
+/*
         if(isResumeAfterPause) {
             CustomerComplaintWebService service = new CustomerComplaintWebService();
             service.queryCustomerComplaints(custNum, this);
         }
+*/
 
         Log.i("ComplaintFragment", "onResume");
     }
@@ -192,7 +209,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
         pDialog.show();*/
-        if(isResumeAfterPause)
+        if(isResumeAfterPause || isRefresh)
             ProgressBarHelper.getInstance().showProgressBar(rootView.getContext());
 
     }
@@ -204,6 +221,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
             pDialog.dismiss();
             pDialog = null;
         }*/
+        isRefresh = false;
         ProgressBarHelper.getInstance().hideProgressBar();
         complaintListVewAdapter.setData((ArrayList<CustomerComplaintData>)result);
         complaintListVewAdapter.notifyDataSetChanged();
@@ -220,5 +238,10 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
         intent.putExtra(COMPLAINT_TYPE_SIZE, cArraySize);
         //This method will start the other activity.
         startActivity(intent);
+    }
+
+    private void refreshCustomerComplaint() {
+        CustomerComplaintWebService service = new CustomerComplaintWebService();
+        service.queryCustomerComplaints(custNum, this);
     }
 }

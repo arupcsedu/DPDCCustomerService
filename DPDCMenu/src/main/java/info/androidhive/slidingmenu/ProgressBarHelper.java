@@ -20,7 +20,8 @@ public class ProgressBarHelper {
     }
 
     public void showProgressBar(Context context) {
-        if(this.showCount == 0) {
+        if(this.showCount == 0 || progressDialog == null) {
+            showCount = 0;
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("Please wait...");
             progressDialog.setCancelable(false);
@@ -31,8 +32,9 @@ public class ProgressBarHelper {
 
     public void hideProgressBar() {
         this.showCount--;
-        if (progressDialog.isShowing() && this.showCount == 0) {
-            progressDialog.dismiss();
+        if (progressDialog != null && progressDialog.isShowing() && this.showCount == 0) {
+            if(progressDialog.isShowing())
+                progressDialog.dismiss();
             progressDialog = null;
         }
     }

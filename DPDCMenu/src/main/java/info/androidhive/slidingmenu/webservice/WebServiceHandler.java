@@ -59,6 +59,7 @@ public class WebServiceHandler {
                 }
 
                 httpResponse = httpClient.execute(httpPost);
+                response = Integer.toString(httpResponse.getStatusLine().getStatusCode());
 
             } else if (method == GET) {
                 // appending params to url
@@ -70,10 +71,10 @@ public class WebServiceHandler {
                 HttpGet httpGet = new HttpGet(url);
 
                 httpResponse = httpClient.execute(httpGet);
+                httpEntity = httpResponse.getEntity();
+                response = EntityUtils.toString(httpEntity);
 
             }
-            httpEntity = httpResponse.getEntity();
-            response = EntityUtils.toString(httpEntity);
 
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();

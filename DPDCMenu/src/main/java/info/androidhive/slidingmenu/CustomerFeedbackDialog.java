@@ -3,7 +3,9 @@ package info.androidhive.slidingmenu;
 import android.app.DialogFragment;
 import android.app.FragmentManager;
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -53,6 +55,8 @@ public class CustomerFeedbackDialog extends DialogFragment {
 
             CustomerFeedbackWebService feedbackService = new CustomerFeedbackWebService();
             feedbackService.submitCustomerFeedback(trackNo, Integer.toString(rating), null);
+
+            Toast.makeText(rootView.getContext(), "Thank you for your rating. Please refresh to see the update.", Toast.LENGTH_SHORT).show();
 
             thisDialog.getDialog().dismiss();
 

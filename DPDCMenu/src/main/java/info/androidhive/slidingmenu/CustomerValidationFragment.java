@@ -103,7 +103,7 @@ public class CustomerValidationFragment extends Fragment {
 
                         Toast toast = Toast.makeText(context, text, duration);
                         toast.show();
-                        Log.e("CustomerValidationFragment", "Error in Mobile No");
+                        Log.i("CustomerValidationFragment", "Error in Mobile No");
                     }
                 }
                 else {
@@ -114,7 +114,7 @@ public class CustomerValidationFragment extends Fragment {
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                    Log.e("CustomerValidationFragment", "Error in Internet Connection");
+                    Log.i("CustomerValidationFragment", "Error in Internet Connection");
 
                 }
             }
@@ -249,7 +249,8 @@ public class CustomerValidationFragment extends Fragment {
                     customerCheckFragment.setArguments(args);
 
                     FragmentManager fragmentManager = getFragmentManager();
-                    fragmentManager.beginTransaction()
+                    if(fragmentManager != null)
+                        fragmentManager.beginTransaction()
                             .replace(R.id.frame_container, customerCheckFragment).commit();
 
                 } else {
