@@ -150,11 +150,12 @@ public class CustomerValidationFragment extends Fragment {
         protected void onPreExecute() {
             super.onPreExecute();
             // Showing progress dialog
-            pDialog = new ProgressDialog(rootView.getContext());
+            /*pDialog = new ProgressDialog(rootView.getContext());
             pDialog.setMessage("Please wait...");
             pDialog.setCancelable(false);
-            pDialog.show();
+            pDialog.show();*/
 
+            ProgressBarHelper.getInstance().showProgressBar(rootView.getContext());
         }
 
         @Override
@@ -225,8 +226,11 @@ public class CustomerValidationFragment extends Fragment {
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
             // Dismiss the progress dialog
-            if (pDialog.isShowing())
-                pDialog.dismiss();
+            /*if (pDialog.isShowing())
+                pDialog.dismiss();*/
+
+            //ProgressBarHelper.getInstance().hideProgressBar();
+
            // Log.d("CustomerValidationFragment", "Json List length " + customerItems.length());
             if(customerItems!=null) {
                 Fragment customerCheckFragment = new CustomerComplaintFragment();

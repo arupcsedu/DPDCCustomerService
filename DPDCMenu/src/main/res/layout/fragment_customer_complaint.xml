@@ -105,19 +105,15 @@
 
 
                 <TextView
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Complaint List"
                     android:id="@+id/textView"
-                    android:padding="@dimen/single_line_text_padding_bottom"
                     android:textSize="@dimen/TextSizeMedium"
-                    android:gravity="left" />
-
-            <Space
-                android:layout_width="fill_parent"
-                android:layout_height="2dp"
-                android:background="?android:attr/listDivider"
-                android:clickable="true" />
+                    android:gravity="left"
+                    android:paddingBottom="@dimen/single_line_text_padding_bottom"
+                    android:paddingTop="@dimen/single_line_dense_text_padding_top"
+                    android:paddingLeft="@dimen/text_padding_left" />
 
             <ListView
                 android:layout_width="wrap_content"

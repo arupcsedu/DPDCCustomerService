@@ -188,21 +188,23 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     public void onPreExecute() {
 
         // Showing progress dialog
-        pDialog = new ProgressDialog(rootView.getContext());
+        /*pDialog = new ProgressDialog(rootView.getContext());
         pDialog.setMessage("Please wait...");
         pDialog.setCancelable(false);
-        pDialog.show();
+        pDialog.show();*/
+        if(isResumeAfterPause)
+            ProgressBarHelper.getInstance().showProgressBar(rootView.getContext());
 
     }
 
     @Override
     public void onPostExecute(Object result) {
         // Dismiss the progress dialog
-        if (pDialog.isShowing()) {
+        /*if (pDialog.isShowing()) {
             pDialog.dismiss();
             pDialog = null;
-        }
-
+        }*/
+        ProgressBarHelper.getInstance().hideProgressBar();
         complaintListVewAdapter.setData((ArrayList<CustomerComplaintData>)result);
         complaintListVewAdapter.notifyDataSetChanged();
     }
