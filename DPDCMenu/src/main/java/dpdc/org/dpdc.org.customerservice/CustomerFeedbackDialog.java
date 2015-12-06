@@ -1,12 +1,8 @@
-package info.androidhive.slidingmenu;
+package dpdc.org.customerservice;
 
 import android.app.DialogFragment;
-import android.app.FragmentManager;
 import android.app.ProgressDialog;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,8 +10,7 @@ import android.widget.Button;
 import android.widget.RatingBar;
 import android.widget.Toast;
 
-import info.androidhive.slidingmenu.webservice.CustomerFeedbackWebService;
-import info.androidhive.slidingmenu.webservice.WeServiceExecutionEvent;
+import dpdc.org.customerservice.webservice.CustomerFeedbackWebService;
 
 /**
  * Created by ASUS on 12/4/2015.
@@ -36,10 +31,10 @@ public class CustomerFeedbackDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        rootView = inflater.inflate(R.layout.customer_feedback_dialog, container, false);
+        rootView = inflater.inflate(dpdc.org.customerservice.R.layout.customer_feedback_dialog, container, false);
         getDialog().setTitle("Customer Rating");
-        Button btnSubmit = (Button) rootView.findViewById(R.id.btn_submit_rating);
-        ratingBar = (RatingBar)rootView.findViewById(R.id.ratingbar_complaint);
+        Button btnSubmit = (Button) rootView.findViewById(dpdc.org.customerservice.R.id.btn_submit_rating);
+        ratingBar = (RatingBar)rootView.findViewById(dpdc.org.customerservice.R.id.ratingbar_complaint);
         ratingBar.setNumStars(5);
         ratingBar.setStepSize((float)1.0);
 

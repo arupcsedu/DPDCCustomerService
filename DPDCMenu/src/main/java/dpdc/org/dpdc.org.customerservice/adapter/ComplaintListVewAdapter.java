@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu.adapter;
+package dpdc.org.customerservice.adapter;
 
 import android.app.Activity;
 import android.content.Context;
@@ -7,17 +7,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
-import android.widget.BaseAdapter;
-import android.widget.ListAdapter;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
-import java.util.HashMap;
-import info.androidhive.slidingmenu.R;
-import info.androidhive.slidingmenu.model.CustomerComplaintData;
+
+import dpdc.org.customerservice.R;
+import dpdc.org.customerservice.model.CustomerComplaintData;
 
 /**
  * Created by ASUS on 11/28/2015.

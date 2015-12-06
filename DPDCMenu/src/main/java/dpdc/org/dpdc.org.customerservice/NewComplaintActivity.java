@@ -1,17 +1,13 @@
-package info.androidhive.slidingmenu;
+package dpdc.org.customerservice;
 
 import android.app.Activity;
-import android.app.Fragment;
 import android.app.FragmentManager;
-import android.app.FragmentTransaction;
 import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,8 +16,6 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -33,7 +27,6 @@ import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -45,8 +38,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
-import info.androidhive.slidingmenu.webservice.ComplaintInfoService;
-import info.androidhive.slidingmenu.webservice.WebServiceHandler;
+import dpdc.org.customerservice.webservice.ComplaintInfoService;
 
 
 public class NewComplaintActivity extends Activity implements OnItemSelectedListener {
@@ -92,12 +84,12 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
             idList = bundle.getIntArray(COMPLAINT_TYPE_ID);
             typeSize = bundle.getInt(COMPLAINT_TYPE_SIZE);
         }
-        setContentView(R.layout.activity_new_complaint);
+        setContentView(dpdc.org.customerservice.R.layout.activity_new_complaint);
 
         complaintList = new ArrayList<HashMap<String, String>>();
 
         // Spinner element
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        Spinner spinner = (Spinner) findViewById(dpdc.org.customerservice.R.id.spinner);
 
         // Spinner click listener
         spinner.setOnItemSelectedListener(this);
@@ -122,9 +114,9 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
         // attaching data adapter to spinner
         spinner.setAdapter(dataAdapter);
 
-        Button customerSubBtn = (Button) findViewById(R.id.newBtnRegister);
-        mobileText = (EditText) findViewById(R.id.contact_no);
-        remarkText = (EditText) findViewById(R.id.new_comment);
+        Button customerSubBtn = (Button) findViewById(dpdc.org.customerservice.R.id.newBtnRegister);
+        mobileText = (EditText) findViewById(dpdc.org.customerservice.R.id.contact_no);
+        remarkText = (EditText) findViewById(dpdc.org.customerservice.R.id.new_comment);
 
         mobileText.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -174,7 +166,7 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_new_complaint, menu);
+        getMenuInflater().inflate(dpdc.org.customerservice.R.menu.menu_new_complaint, menu);
         return true;
     }
 
@@ -186,7 +178,7 @@ public class NewComplaintActivity extends Activity implements OnItemSelectedList
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        if (id == dpdc.org.customerservice.R.id.action_settings) {
             return true;
         }
 

@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu.model;
+package dpdc.org.customerservice.model;
 
 /**
  * Created by Ayub on 11/29/2015.

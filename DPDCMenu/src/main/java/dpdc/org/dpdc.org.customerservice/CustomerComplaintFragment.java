@@ -1,15 +1,10 @@
-package info.androidhive.slidingmenu;
+package dpdc.org.customerservice;
 
-import android.app.Activity;
 import android.app.DialogFragment;
 import android.app.ProgressDialog;
-import android.content.BroadcastReceiver;
-import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -17,22 +12,17 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import info.androidhive.slidingmenu.R;
-import info.androidhive.slidingmenu.adapter.ComplaintListVewAdapter;
-import info.androidhive.slidingmenu.model.CustomerComplaintData;
-import info.androidhive.slidingmenu.webservice.CustomerComplaintWebService;
-import info.androidhive.slidingmenu.webservice.WeServiceExecutionEvent;
-import info.androidhive.slidingmenu.webservice.WebServiceHandler;
+import dpdc.org.customerservice.model.CustomerComplaintData;
+import dpdc.org.customerservice.adapter.ComplaintListVewAdapter;
+import dpdc.org.customerservice.webservice.CustomerComplaintWebService;
+import dpdc.org.customerservice.webservice.WeServiceExecutionEvent;
 
 public class CustomerComplaintFragment extends Fragment implements WeServiceExecutionEvent {
     // TODO: Rename parameter arguments, choose names that match
@@ -79,8 +69,8 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         if(menu != null) {
-            menu.findItem(R.id.action_new_complaint).setVisible(true);
-            menu.findItem(R.id.action_refresh).setVisible(true);
+            menu.findItem(dpdc.org.customerservice.R.id.action_new_complaint).setVisible(true);
+            menu.findItem(dpdc.org.customerservice.R.id.action_refresh).setVisible(true);
         }
         optMenu = menu;
     }
@@ -88,8 +78,8 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
     @Override
     public void onDestroyView() {
         if(optMenu != null) {
-            optMenu.findItem(R.id.action_new_complaint).setVisible(false);
-            optMenu.findItem(R.id.action_refresh).setVisible(false);
+            optMenu.findItem(dpdc.org.customerservice.R.id.action_new_complaint).setVisible(false);
+            optMenu.findItem(dpdc.org.customerservice.R.id.action_refresh).setVisible(false);
         }
 
         super.onDestroyView();
@@ -102,12 +92,12 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
 
         switch (item.getItemId()) {
 
-            case R.id.action_new_complaint:
+            case dpdc.org.customerservice.R.id.action_new_complaint:
 
                 openNewComplaintActivity();
                 return true;
 
-            case R.id.action_refresh: {
+            case dpdc.org.customerservice.R.id.action_refresh: {
                 isRefresh = true;
                 refreshCustomerComplaint();
                 return true;
@@ -131,12 +121,12 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
         complaintIdArray =  this.getArguments().getIntArray(COMPLAINT_TYPE_ID);
         cArraySize = this.getArguments().getInt(COMPLAINT_TYPE_SIZE);
 
-        rootView = inflater.inflate(R.layout.fragment_customer_complaint, container, false);
+        rootView = inflater.inflate(dpdc.org.customerservice.R.layout.fragment_customer_complaint, container, false);
 
         // Displaying all values on the screen
-        TextView lblNum = (TextView) rootView.findViewById(R.id.customer_no);
-        TextView lblName = (TextView) rootView.findViewById(R.id.customer_name);
-        TextView lblAddr = (TextView) rootView.findViewById(R.id.address);
+        TextView lblNum = (TextView) rootView.findViewById(dpdc.org.customerservice.R.id.customer_no);
+        TextView lblName = (TextView) rootView.findViewById(dpdc.org.customerservice.R.id.customer_name);
+        TextView lblAddr = (TextView) rootView.findViewById(dpdc.org.customerservice.R.id.address);
 
         lblNum.setText(custNum);
         lblName.setText(custName);
@@ -144,8 +134,8 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
         lblAddr.setText(custAddr);
 
         complaintListVewAdapter = new ComplaintListVewAdapter(getActivity().getApplicationContext(),
-                R.id.list_customer_complaint, complaints, getActivity());
-        ListView lvCustomerComplaint = (ListView)rootView.findViewById(R.id.list_customer_complaint);
+                dpdc.org.customerservice.R.id.list_customer_complaint, complaints, getActivity());
+        ListView lvCustomerComplaint = (ListView)rootView.findViewById(dpdc.org.customerservice.R.id.list_customer_complaint);
         lvCustomerComplaint.setAdapter(complaintListVewAdapter);
 
         lvCustomerComplaint.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -158,7 +148,7 @@ public class CustomerComplaintFragment extends Fragment implements WeServiceExec
                if(item.rating == 0 && item.status.compareTo(STATUS_RESOLVED) == 0) {
 
                    CustomerFeedbackDialog feedbackDialog = new CustomerFeedbackDialog();
-                   feedbackDialog.setStyle(DialogFragment.STYLE_NORMAL, R.style.AppTheme);
+                   feedbackDialog.setStyle(DialogFragment.STYLE_NORMAL, dpdc.org.customerservice.R.style.AppTheme);
                    //Bundle args = new Bundle();
                    //args.putString("track_no", item.trackNo);
                    //feedbackDialog.setArguments(args);

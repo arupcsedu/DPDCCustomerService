@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu.webservice;
+package dpdc.org.customerservice.webservice;
 
 /**
  * Created by Ayub on 12/6/2015.

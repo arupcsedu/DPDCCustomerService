@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu.webservice;
+package dpdc.org.customerservice.webservice;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;

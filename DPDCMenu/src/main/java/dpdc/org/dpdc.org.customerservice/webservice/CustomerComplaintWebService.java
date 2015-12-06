@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu.webservice;
+package dpdc.org.customerservice.webservice;
 
 import android.os.AsyncTask;
 import android.util.Log;
@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import info.androidhive.slidingmenu.model.CustomerComplaintData;
+import dpdc.org.customerservice.model.CustomerComplaintData;
 
 /* Async task class to get json by making HTTP call
  * */

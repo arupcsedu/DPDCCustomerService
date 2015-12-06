@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu;
+package dpdc.org.customerservice;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -20,7 +20,8 @@ public class ProgressBarHelper {
     }
 
     public void showProgressBar(Context context) {
-        if(this.showCount == 0 || progressDialog == null) {
+        if(this.showCount == 0 || progressDialog == null ||
+        !(progressDialog != null && !progressDialog.isShowing())) {
             showCount = 0;
             progressDialog = new ProgressDialog(context);
             progressDialog.setMessage("Please wait...");
@@ -33,8 +34,7 @@ public class ProgressBarHelper {
     public void hideProgressBar() {
         this.showCount--;
         if (progressDialog != null && progressDialog.isShowing() && this.showCount == 0) {
-            if(progressDialog.isShowing())
-                progressDialog.dismiss();
+            progressDialog.dismiss();
             progressDialog = null;
         }
     }

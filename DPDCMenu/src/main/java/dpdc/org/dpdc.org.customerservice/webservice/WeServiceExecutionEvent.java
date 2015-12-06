@@ -1,4 +1,4 @@
-package info.androidhive.slidingmenu.webservice;
+package dpdc.org.customerservice.webservice;
 
 /**
  * Created by ASUS on 11/29/2015.
